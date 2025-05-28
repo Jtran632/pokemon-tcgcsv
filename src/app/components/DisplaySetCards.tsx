@@ -107,7 +107,7 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
                   alt={pSet.name}
                   onError={(e) => {
                     e.currentTarget.src =
-                      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg overflow-hidden scale-150";
+                      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
                     e.currentTarget.className = "border border-red-300";
                   }}
                   className="contrast-110 brightness-100 rounded-xl w-full"
