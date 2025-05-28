@@ -55,7 +55,7 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen py-2">
       <h1 className="text-4xl font-bold">TCG Player Sets</h1>
       <div className="grid grid-cols-8 grid-rows-flow gap-0.5 text-[10px]">
-        {sortedData.map((pSet: any) => (
+        {sortedData.map((pSet: ISets) => (
           <Link
             href={`/set/${pSet.groupId}`}
             key={pSet.groupId}

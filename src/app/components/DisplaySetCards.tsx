@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Link from "next/link";
 import { use, useEffect, useState } from "react";
@@ -23,7 +24,6 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
   const [other, setOther] = useState<CardI[]>([]);
   const [curCard, setCurCard] = useState<CardI | null>(null);
   useEffect(() => {
-    console.log(setData);
     setCards(
       setData.results.filter(
         (pSet: CardI) => pSet.extendedData && pSet.extendedData.length > 3
@@ -34,11 +34,13 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
         (pSet: CardI) => pSet.extendedData && pSet.extendedData.length <= 3
       )
     );
-    console.log(curCard);
   }, [setData]);
-  useEffect(() => {
-    console.log(curCard);
-  }, [curCard]);
+  // useEffect(() => {
+  //   console.log(cards.map((pSet: CardI) => pSet.extendedData[1].value));
+  // }, [cards]);
+  // useEffect(() => {
+  //   console.log(curCard);
+  // }, [curCard]);
   return (
     <div className="flex flex-col pt-10 w-full min-h-screen">
       <div className="flex justify-center items-center">
@@ -58,14 +60,24 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
               </button>
             </div>
             <div className="flex w-full justify-center items-center px-54 pt-15">
-              <img
-                src={curCard?.imageUrl.replace(
-                  "_200w.jpg",
-                  "_in_1000x1000.jpg"
-                )}
-                alt={curCard?.name}
-                className="w-full rounded-[32px]"
-              ></img>
+              <div className="relative w-full h-full">
+                <img
+                  src={curCard?.imageUrl.replace(
+                    "_200w.jpg",
+                    "_in_1000x1000.jpg"
+                  )}
+                  alt={curCard?.name}
+                  className="w-full rounded-[32px]"
+                ></img>
+                {/* <img
+                  src={"https://i.gifer.com/68m.gif"}
+                  className="absolute top-0  mix-blend-soft-light brightness rounded-[32px] w-full h-full pointer-events-none contrast-200"
+                /> */}
+                {/* <img
+                  src={"https://i.gifer.com/IrF.gif"}
+                  className="absolute top-0 mix-blend-color-dodge p-5 brightness-200 rounded-2xl blur-[2px]"
+                /> */}
+              </div>
             </div>
           </div>
         </div>
@@ -80,6 +92,7 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
                 onClick={() => {
                   if (curCard === null) {
                     setCurCard(pSet);
+                    console.log(pSet.extendedData[1].value);
                   }
                 }}
               >
@@ -94,7 +107,7 @@ export default function DisplaySetCards({ data }: { data: Promise<object> }) {
                   alt={pSet.name}
                   onError={(e) => {
                     e.currentTarget.src =
-                      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+                      "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg overflow-hidden scale-150";
                     e.currentTarget.className = "border border-red-300";
                   }}
                   className="contrast-110 brightness-100 rounded-xl w-full"
